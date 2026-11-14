@@ -20,7 +20,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "fairapp-secret-key-2026"
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-key")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///fairapp.db"
 
