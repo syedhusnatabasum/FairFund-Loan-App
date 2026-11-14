@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Repayment | FairApp</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #eef4ff,
+                #eafff7
+            );
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #3157d5;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .loan-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .loan-card h2 {
+            color: #0ca678;
+            margin-top: 0;
+        }
+
+        .loan-info {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(180px, 1fr)
+            );
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #f7f9ff;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .status {
+            font-weight: bold;
+            color: #0ca678;
+        }
+
+        .pay-btn {
+            background: linear-gradient(
+                135deg,
+                #3157d5,
+                #0ca678
+            );
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .pay-btn:hover {
+            opacity: 0.9;
+        }
+
+        .paid {
+            color: #0ca678;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3157d5;
+            font-weight: bold;
+        }
+
+        .message {
+            background: #e8fff5;
+            color: #087f5b;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>FairApp Repayment</h1>
+
+        <p>
+            Track and manage your approved loan repayments.
+        </p>
+
+    </div>
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    {% if loans %}
+
+        {% for loan in loans %}
+
+            <div class="loan-card">
+
+                <h2>
+                    ₹{{ "%.2f"|format(loan.amount) }}
+                </h2>
+
+
+                <div class="loan-info">
+
+                    <div class="info-box">
+
+                        <strong>Purpose</strong>
+
+                        {{ loan.purpose }}
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>Repayment Period</strong>
+
+                        {{ loan.repayment_period }}
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>Security</strong>
+
+                        {{ loan.security_type }}
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>Loan Status</strong>
+
+                        <span class="status">
+                            {{ loan.status }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>Repayment Status</strong>
+
+                        {{ loan.repayment_status }}
+
+                    </div>
+
+                </div>
+
+
+                {% if loan.repayment_status == "Paid" %}
+
+                    <div class="paid">
+                        ✓ Repayment Completed
+                    </div>
+
+                {% else %}
+
+                    <form method="POST"
+                          action="{{ url_for('repayment') }}">
+
+                        <input
+                            type="hidden"
+                            name="loan_id"
+                            value="{{ loan.id }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="pay-btn"
+                        >
+                            Mark Repayment as Paid
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+
+            <h2>No Approved Loans</h2>
+
+            <p>
+                You currently don't have any approved loans
+                available for repayment.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <a href="{{ url_for('dashboard') }}"
+       class="back">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

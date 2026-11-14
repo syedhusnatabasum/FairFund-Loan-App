@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register | FairApp</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span class="fair">FAIR</span><span class="app">APP</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('login') }}"
+           class="nav-login">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+
+        <div class="auth-side">
+
+            <div class="big-icon">
+                🤝
+            </div>
+
+            <h2>
+                Welcome to FairApp
+            </h2>
+
+            <p>
+                Create your account and start your
+                interest-free lending journey.
+            </p>
+
+            <div class="auth-points">
+
+                <div>✓ Interest-Free Loans</div>
+
+                <div>✓ Secure Verification</div>
+
+                <div>✓ Transparent Tracking</div>
+
+                <div>✓ Responsible Borrowing</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-form-area">
+
+            <h1>
+                Create Account
+            </h1>
+
+            <p class="auth-subtitle">
+                Join FairApp today.
+            </p>
+
+
+            <form method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Minimum 8 characters"
+                        minlength="8"
+                        required>
+
+                    <span class="form-help">
+                        Password must contain at least 8 characters.
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button">
+
+                    Create FairApp Account →
+
+                </button>
+
+
+            </form>
+
+
+            <div class="auth-bottom">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

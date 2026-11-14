@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verification | FairApp</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="form-page">
+
+<div class="form-container">
+
+    <div class="form-logo">
+        FAIR<span>APP</span>
+    </div>
+
+    <p class="tag">
+        SECURITY VERIFICATION
+    </p>
+
+    <h1>
+        Verify Your Account
+    </h1>
+
+    <p class="form-subtitle">
+        Verification helps FairApp provide responsible lending.
+    </p>
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% for message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+    <form method="POST">
+
+        <label>Government ID / Student ID</label>
+
+        <input type="text"
+               name="identity"
+               placeholder="Enter verification ID"
+               required>
+
+
+        <label>Monthly Income / Support</label>
+
+        <input type="number"
+               name="income"
+               placeholder="Enter amount"
+               required>
+
+
+        <label>Emergency Contact</label>
+
+        <input type="text"
+               name="emergency"
+               placeholder="Emergency contact number"
+               required>
+
+
+        <button type="submit"
+                class="form-button">
+
+            Submit Verification
+
+        </button>
+
+    </form>
+
+
+    <a href="{{ url_for('dashboard') }}"
+       class="back-link">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+</body>
+
+</html>
