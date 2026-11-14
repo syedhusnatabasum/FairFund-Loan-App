@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FairApp | Interest-Free Lending</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span class="fair">FAIR</span><span class="app">APP</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">Home</a>
+
+        <a href="#how-it-works">How It Works</a>
+
+        <a href="#security">Security</a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('admin') }}">
+            Admin
+        </a>
+
+        <a href="{{ url_for('login') }}"
+           class="nav-login">
+            Login
+        </a>
+
+        <a href="{{ url_for('register') }}"
+           class="nav-register">
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="hero-badge">
+            ✨ SMART • FAIR • TRANSPARENT
+        </div>
+
+        <h1>
+            Borrow Fairly.
+            <br>
+            <span>Live Freely.</span>
+        </h1>
+
+        <p>
+            FairApp is a simple and transparent interest-free
+            lending platform designed to make borrowing easier,
+            safer and more responsible.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('register') }}"
+               class="btn-primary">
+                Get Started →
+            </a>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="btn-secondary">
+                View Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="hero-card">
+
+        <div class="icon">
+            🤝
+        </div>
+
+        <h2>
+            Fair Lending
+        </h2>
+
+        <p>
+            Trusted • Secure • Interest-Free
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="features" id="how-it-works">
+
+    <h2>
+        How FairApp Works
+    </h2>
+
+    <p>
+        Simple steps for safe and transparent borrowing.
+    </p>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📝
+            </div>
+
+            <h3>
+                1. Register
+            </h3>
+
+            <p>
+                Create your FairApp account
+                securely.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                2. Apply for Loan
+            </h3>
+
+            <p>
+                Submit your loan requirement
+                with security details.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔐
+            </div>
+
+            <h3>
+                3. Verification
+            </h3>
+
+            <p>
+                Security and verification checks
+                are performed.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ✅
+            </div>
+
+            <h3>
+                4. Approval
+            </h3>
+
+            <p>
+                Admin reviews and approves
+                eligible loan applications.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SECURITY ================= -->
+
+<section class="features" id="security">
+
+    <h2>
+        Safe & Responsible Lending
+    </h2>
+
+    <p>
+        FairApp focuses on transparency, security and responsible borrowing.
+    </p>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                0% Interest
+            </h3>
+
+            <p>
+                No hidden interest charges are
+                added to the loan.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <h3>
+                Secure Verification
+            </h3>
+
+            <p>
+                Borrower information and security
+                details are checked.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Loan Tracking
+            </h3>
+
+            <p>
+                Monitor loan status and repayment
+                progress through Dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                👨‍💼
+            </div>
+
+            <h3>
+                Admin Approval
+            </h3>
+
+            <p>
+                Admin can review, approve or
+                reject loan applications.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUICK ACCESS ================= -->
+
+<section class="features">
+
+    <h2>
+        FairApp Quick Access
+    </h2>
+
+    <p>
+        Manage your FairApp activities from one place.
+    </p>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Dashboard
+            </h3>
+
+            <p>
+                View members, loans, repayments
+                and loan status.
+            </p>
+
+            <br>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="btn-primary">
+                Open Dashboard →
+            </a>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                👨‍💼
+            </div>
+
+            <h3>
+                Admin Panel
+            </h3>
+
+            <p>
+                Review pending applications and
+                approve or reject loans.
+            </p>
+
+            <br>
+
+            <a href="{{ url_for('admin') }}"
+               class="btn-primary">
+                Open Admin →
+            </a>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📝
+            </div>
+
+            <h3>
+                Apply for Loan
+            </h3>
+
+            <p>
+                Submit your interest-free loan
+                application.
+            </p>
+
+            <br>
+
+            <a href="{{ url_for('apply_loan') }}"
+               class="btn-primary">
+                Apply Now →
+            </a>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💳
+            </div>
+
+            <h3>
+                Repayment
+            </h3>
+
+            <p>
+                Track and manage your loan
+                repayment.
+            </p>
+
+            <br>
+
+            <a href="{{ url_for('repayment') }}"
+               class="btn-primary">
+                Repayment →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="logo">
+        <span class="fair">FAIR</span><span class="app">APP</span>
+    </div>
+
+    <p>
+        Fair Lending • Trusted Borrowing • 0% Interest
+    </p>
+
+    <p>
+        © 2026 FairApp. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FairApp | Apply for Loan</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f4f7ff, #ecfbf5);
+            color: #18233d;
+            min-height: 100vh;
+        }
+
+        /* WATERMARK */
+
+        body::before {
+            content: "FAIRFUND";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 125px;
+            font-weight: 800;
+            color: rgba(40, 85, 217, 0.035);
+            z-index: -1;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 76px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 7%;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        }
+
+        .logo {
+            font-size: 31px;
+            font-weight: 800;
+            color: #2855d9;
+        }
+
+        .logo span {
+            color: #0ca66a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4d5a72;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #2855d9;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #2855d9, #4b70e8);
+            color: white !important;
+            padding: 11px 18px;
+            border-radius: 10px;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 40px auto 60px;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8efff;
+            color: #2855d9;
+            padding: 8px 17px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .page-header h1 span {
+            color: #0ca66a;
+        }
+
+        .page-header p {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        /* SECURITY BANNER */
+
+        .security-banner {
+            background: linear-gradient(135deg, #2855d9, #426ce4);
+            color: white;
+            border-radius: 18px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            box-shadow: 0 10px 25px rgba(40,85,217,0.18);
+        }
+
+        .security-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            flex-shrink: 0;
+        }
+
+        .security-banner h3 {
+            margin-bottom: 5px;
+        }
+
+        .security-banner p {
+            color: #e7edff;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FORM CARD */
+
+        .form-card {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(38,57,89,0.09);
+            border: 1px solid #edf1f7;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #edf1f7;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e9f0ff;
+            color: #2855d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .section-title h2 {
+            font-size: 20px;
+        }
+
+        /* GRID */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #354158;
+        }
+
+        .label-icon {
+            margin-right: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #dce2ed;
+            border-radius: 11px;
+            background: #fbfcff;
+            color: #25304a;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2855d9;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(40,85,217,0.08);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .help {
+            color: #8490a4;
+            font-size: 12px;
+        }
+
+        /* SECURITY SELECT */
+
+        .security-select-box {
+            background: #f6f9ff;
+            border: 1px solid #dfe7f7;
+            border-radius: 15px;
+            padding: 18px;
+        }
+
+        /* CONDITIONAL SECURITY */
+
+        .security-details {
+            display: none;
+            margin-top: 20px;
+            padding: 22px;
+            background: #f8fbff;
+            border: 1px solid #e1e8f5;
+            border-radius: 16px;
+        }
+
+        .security-details.show {
+            display: block;
+        }
+
+        .security-details h3 {
+            color: #2855d9;
+            margin-bottom: 17px;
+            font-size: 17px;
+        }
+
+        /* SECURITY OPTIONS */
+
+        .security-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 13px;
+        }
+
+        .option {
+            border: 1px solid #dce3ef;
+            background: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 13px;
+            color: #4c5870;
+        }
+
+        .option-icon {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        /* AGREEMENT */
+
+        .agreement {
+            background: #f1fbf6;
+            border: 1px solid #d4f1e3;
+            border-radius: 14px;
+            padding: 17px;
+            margin-top: 25px;
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+        }
+
+        .agreement input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .agreement label {
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        .submit-btn {
+            flex: 1;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0ca66a, #19c887);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(12,166,106,0.22);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            padding: 16px 25px;
+            border-radius: 12px;
+            background: #eef2f8;
+            color: #354158;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover {
+            background: #e3e8f1;
+        }
+
+        /* BOTTOM INFO */
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 17px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(38,57,89,0.07);
+            border: 1px solid #edf1f7;
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: #edf3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #edf1f7;
+        }
+
+        footer strong {
+            color: #2855d9;
+            font-size: 21px;
+        }
+
+        footer strong span {
+            color: #0ca66a;
+        }
+
+        footer p {
+            color: #7b8799;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .security-options {
+                grid-template-columns: 1fr;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+            .security-banner {
+                align-items: flex-start;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        FAIR<span>APP</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/apply-loan"
+           class="nav-button">
+            Apply Loan
+        </a>
+
+        <a href="/admin">
+            Admin
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <div class="tag">
+            SMART • FAIR • RESPONSIBLE
+        </div>
+
+        <h1>
+            Apply for an
+            <span>Interest-Free Loan</span>
+        </h1>
+
+        <p>
+            Complete your application with secure verification
+            and responsible borrowing information.
+        </p>
+
+    </div>
+
+
+
+    <!-- SECURITY BANNER -->
+
+    <div class="security-banner">
+
+        <div class="security-icon">
+            🛡️
+        </div>
+
+        <div>
+
+            <h3>
+                Security Protected Application
+            </h3>
+
+            <p>
+                FairApp uses verification, eligibility checks,
+                security information and admin approval to
+                encourage responsible borrowing.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FORM -->
+
+    <div class="form-card">
+
+        <form method="POST"
+              action="{{ url_for('apply_loan') }}">
+
+
+            <!-- LOAN DETAILS -->
+
+            <div class="section-title">
+
+                <div class="section-number">
+                    1
+                </div>
+
+                <h2>
+                    Loan Details
+                </h2>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- AMOUNT -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">💰</span>
+                        Loan Amount (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="amount"
+                        placeholder="Enter required amount"
+                        min="1"
+                        required
+                    >
+
+                    <span class="help">
+                        Enter the amount you genuinely need.
+                    </span>
+
+                </div>
+
+
+
+                <!-- REPAYMENT -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">📅</span>
+                        Repayment Period
+                    </label>
+
+                    <select
+                        name="repayment_period"
+                        required
+                    >
+
+                        <option value="">
+                            Select repayment period
+                        </option>
+
+                        <option value="3">
+                            3 Months
+                        </option>
+
+                        <option value="6">
+                            6 Months
+                        </option>
+
+                        <option value="9">
+                            9 Months
+                        </option>
+
+                        <option value="12">
+                            12 Months
+                        </option>
+
+                        <option value="18">
+                            18 Months
+                        </option>
+
+                        <option value="24">
+                            24 Months
+                        </option>
+
+                    </select>
+
+                    <span class="help">
+                        Choose a realistic repayment period.
+                    </span>
+
+                </div>
+
+
+
+                <!-- PURPOSE -->
+
+                <div class="field full">
+
+                    <label>
+                        <span class="label-icon">📝</span>
+                        Purpose of Loan
+                    </label>
+
+                    <textarea
+                        name="purpose"
+                        placeholder="Explain why you need the loan..."
+                        required
+                    ></textarea>
+
+                    <span class="help">
+                        Example: education, emergency,
+                        medical needs, small business, etc.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="section-title">
+
+                <div class="section-number">
+                    2
+                </div>
+
+                <h2>
+                    Loan Security
+                </h2>
+
+            </div>
+
+
+            <div class="security-select-box">
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">🛡️</span>
+                        Security Type
+                    </label>
+
+                    <select
+                        name="security_type"
+                        id="securityType"
+                        required
+                    >
+
+                        <option value="">
+                            Select security type
+                        </option>
+
+                        <option value="guarantor">
+                            👤 Guarantor
+                        </option>
+
+                        <option value="collateral">
+                            🏠 Collateral
+                        </option>
+
+                        <option value="both">
+                            🔐 Guarantor + Collateral
+                        </option>
+
+                    </select>
+
+                    <span class="help">
+                        Select the security you can provide
+                        for responsible repayment.
+                    </span>
+
+                </div>
+
+
+                <!-- SECURITY OPTIONS -->
+
+                <div class="security-options">
+
+                    <div class="option">
+
+                        <span class="option-icon">
+                            👤
+                        </span>
+
+                        <strong>
+                            Guarantor
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Trusted person
+                        </small>
+
+                    </div>
+
+
+                    <div class="option">
+
+                        <span class="option-icon">
+                            🏠
+                        </span>
+
+                        <strong>
+                            Collateral
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Security asset
+                        </small>
+
+                    </div>
+
+
+                    <div class="option">
+
+                        <span class="option-icon">
+                            🔐
+                        </span>
+
+                        <strong>
+                            Both
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Extra security
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GUARANTOR DETAILS -->
+
+                <div
+                    id="guarantorDetails"
+                    class="security-details"
+                >
+
+                    <h3>
+                        👤 Guarantor Information
+                    </h3>
+
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                Guarantor Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="guarantor_name"
+                                id="guarantorName"
+                                placeholder="Enter guarantor name"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Guarantor Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                name="guarantor_phone"
+                                id="guarantorPhone"
+                                placeholder="Enter guarantor phone"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COLLATERAL DETAILS -->
+
+                <div
+                    id="collateralDetails"
+                    class="security-details"
+                >
+
+                    <h3>
+                        🏠 Collateral Information
+                    </h3>
+
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                Collateral Type
+                            </label>
+
+                            <select
+                                name="collateral_type"
+                            >
+
+                                <option value="">
+                                    Select collateral
+                                </option>
+
+                                <option value="property">
+                                    Property
+                                </option>
+
+                                <option value="vehicle">
+                                    Vehicle
+                                </option>
+
+                                <option value="gold">
+                                    Gold / Jewellery
+                                </option>
+
+                                <option value="other">
+                                    Other Asset
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Estimated Value (₹)
+                            </label>
+
+                            <input
+                                type="number"
+                                name="collateral_value"
+                                placeholder="Enter estimated value"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RESPONSIBLE BORROWING -->
+
+            <div class="agreement">
+
+                <input
+                    type="checkbox"
+                    id="agreement"
+                    required
+                >
+
+                <label for="agreement">
+
+                    I confirm that the information provided is
+                    correct and I understand that FairApp may
+                    require verification, security checks and
+                    admin approval before approving the loan.
+
+                </label>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a
+                    href="/dashboard"
+                    class="back-btn"
+                >
+                    ← Back to Dashboard
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    🛡️ Submit Secure Loan Application
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- INFORMATION CARDS -->
+
+    <div class="info-cards">
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                0%
+            </div>
+
+            <h3>
+                Interest-Free
+            </h3>
+
+            <p>
+                FairApp follows an interest-free
+                lending model.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                🛡️
+            </div>
+
+            <h3>
+                Security Protected
+            </h3>
+
+            <p>
+                Applications can include a guarantor
+                or collateral for added responsibility.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ✅
+            </div>
+
+            <h3>
+                Admin Reviewed
+            </h3>
+
+            <p>
+                Applications are reviewed before
+                final approval.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>
+        FAIR<span>APP</span>
+    </strong>
+
+    <p>
+        Interest-Free • Secure • Transparent • Responsible
+    </p>
+
+    <p>
+        © 2026 FairApp
+    </p>
+
+</footer>
+
+
+
+<!-- SECURITY TYPE JAVASCRIPT -->
+
+<script>
+
+    const securityType =
+        document.getElementById("securityType");
+
+    const guarantorDetails =
+        document.getElementById("guarantorDetails");
+
+    const collateralDetails =
+        document.getElementById("collateralDetails");
+
+    const guarantorName =
+        document.getElementById("guarantorName");
+
+    const guarantorPhone =
+        document.getElementById("guarantorPhone");
+
+
+    function updateSecurityFields() {
+
+        const selected =
+            securityType.value;
+
+
+        /* Hide everything first */
+
+        guarantorDetails.classList.remove("show");
+
+        collateralDetails.classList.remove("show");
+
+
+        guarantorName.required = false;
+
+        guarantorPhone.required = false;
+
+
+        /* GUARANTOR */
+
+        if (
+            selected === "guarantor" ||
+            selected === "both"
+        ) {
+
+            guarantorDetails.classList.add("show");
+
+            guarantorName.required = true;
+
+            guarantorPhone.required = true;
+
+        }
+
+
+        /* COLLATERAL */
+
+        if (
+            selected === "collateral" ||
+            selected === "both"
+        ) {
+
+            collateralDetails.classList.add("show");
+
+        }
+
+    }
+
+
+    securityType.addEventListener(
+        "change",
+        updateSecurityFields
+    );
+
+</script>
+
+
+</body>
+
+</html>

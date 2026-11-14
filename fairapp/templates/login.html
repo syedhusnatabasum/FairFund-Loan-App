@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | FairApp</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span class="fair">FAIR</span><span class="app">APP</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('register') }}"
+           class="nav-register">
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+
+        <div class="auth-side">
+
+            <div class="big-icon">
+                🔐
+            </div>
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Login to your FairApp account and
+                manage your interest-free loans securely.
+            </p>
+
+            <div class="auth-points">
+
+                <div>✓ Secure Account</div>
+
+                <div>✓ Loan Management</div>
+
+                <div>✓ Repayment Tracking</div>
+
+                <div>✓ Transparent Lending</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-form-area">
+
+            <h1>
+                Login
+            </h1>
+
+            <p class="auth-subtitle">
+                Access your FairApp dashboard.
+            </p>
+
+
+            <form method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button">
+
+                    Login to FairApp →
+
+                </button>
+
+
+            </form>
+
+
+            <div class="auth-bottom">
+
+                Don't have an account?
+
+                <a href="{{ url_for('register') }}">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | FairApp</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .dashboard-page {
+            min-height: calc(100vh - 80px);
+            background: #f4f7ff;
+            padding: 45px 6%;
+        }
+
+        /* HEADER */
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .dashboard-title h1 {
+            font-size: 40px;
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-title h1 span {
+            color: #0ca678;
+        }
+
+        .dashboard-title p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #3157d5, #0ca678);
+            color: white;
+            text-decoration: none;
+            padding: 14px 23px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+
+        /* STATISTICS */
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .dashboard-stat {
+            background: white;
+            padding: 23px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(30,50,90,0.08);
+            border-top: 4px solid #3157d5;
+        }
+
+        .dashboard-stat:nth-child(2) {
+            border-color: #0ca678;
+        }
+
+        .dashboard-stat:nth-child(3) {
+            border-color: #f59e0b;
+        }
+
+        .dashboard-stat:nth-child(4) {
+            border-color: #22a06b;
+        }
+
+        .dashboard-stat:nth-child(5) {
+            border-color: #e05252;
+        }
+
+        .dashboard-stat .icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-stat small {
+            color: #64748b;
+            font-weight: bold;
+        }
+
+        .dashboard-stat h2 {
+            font-size: 30px;
+            color: #172554;
+            margin-top: 5px;
+        }
+
+
+        /* LOAN SECTION */
+
+        .loan-container {
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 10px 35px rgba(30,50,90,0.08);
+        }
+
+        .loan-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .loan-heading h2 {
+            font-size: 25px;
+            color: #172554;
+        }
+
+        .loan-heading span {
+            background: #e8efff;
+            color: #3157d5;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* TABLE */
+
+        .loan-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .loan-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 950px;
+        }
+
+        .loan-table th {
+            background: #f4f7fb;
+            color: #64748b;
+            text-align: left;
+            padding: 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .loan-table td {
+            padding: 17px 15px;
+            border-bottom: 1px solid #edf0f5;
+            color: #334155;
+        }
+
+        .loan-table tr:hover {
+            background: #f9fbff;
+        }
+
+
+        /* APPLICANT */
+
+        .applicant-box {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .applicant-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3157d5, #0ca678);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 17px;
+        }
+
+        .applicant-name {
+            font-weight: bold;
+            color: #172554;
+        }
+
+        .applicant-id {
+            display: block;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 3px;
+        }
+
+
+        /* AMOUNT */
+
+        .loan-amount {
+            color: #3157d5;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        /* STATUS */
+
+        .loan-status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fff4d6;
+            color: #a66b00;
+        }
+
+        .approved {
+            background: #e4f8ef;
+            color: #07845e;
+        }
+
+        .rejected {
+            background: #ffeaea;
+            color: #c73e3e;
+        }
+
+
+        /* SECURITY */
+
+        .security {
+            color: #475569;
+            font-weight: 600;
+        }
+
+
+        /* EMPTY */
+
+        .empty-dashboard {
+            text-align: center;
+            padding: 65px 20px;
+            color: #64748b;
+        }
+
+        .empty-dashboard .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .empty-dashboard h2 {
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+
+        @media(max-width: 1000px) {
+
+            .dashboard-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media(max-width: 500px) {
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span class="fair">FAIR</span><span class="app">APP</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('admin') }}">
+            Admin
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-register">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="dashboard-page">
+
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div class="dashboard-title">
+
+            <h1>
+                FairApp <span>Dashboard</span>
+            </h1>
+
+            <p>
+                View and monitor all loan applications in one place.
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('apply_loan') }}"
+           class="apply-btn">
+
+            + Apply for Loan
+
+        </a>
+
+    </div>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <div class="dashboard-stats">
+
+
+        <div class="dashboard-stat">
+
+            <div class="icon">
+                👥
+            </div>
+
+            <small>
+                REGISTERED MEMBERS
+            </small>
+
+            <h2>
+                {{ total_members }}
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-stat">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <small>
+                TOTAL LOANS
+            </small>
+
+            <h2>
+                {{ total_loans }}
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-stat">
+
+            <div class="icon">
+                ⏳
+            </div>
+
+            <small>
+                PENDING
+            </small>
+
+            <h2>
+                {{ pending_loans }}
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-stat">
+
+            <div class="icon">
+                ✅
+            </div>
+
+            <small>
+                APPROVED
+            </small>
+
+            <h2>
+                {{ approved_loans }}
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-stat">
+
+            <div class="icon">
+                ❌
+            </div>
+
+            <small>
+                REJECTED
+            </small>
+
+            <h2>
+                {{ rejected_loans }}
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= ALL LOANS ================= -->
+
+    <div class="loan-container">
+
+
+        <div class="loan-heading">
+
+            <h2>
+                📋 All Loan Applications
+            </h2>
+
+            <span>
+                LIVE LOAN RECORDS
+            </span>
+
+        </div>
+
+
+        {% if loans %}
+
+
+        <div class="loan-table-wrapper">
+
+            <table class="loan-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Applicant
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Purpose
+                        </th>
+
+                        <th>
+                            Repayment
+                        </th>
+
+                        <th>
+                            Security
+                        </th>
+
+                        <th>
+                            Guarantor
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% for loan in loans %}
+
+                    <tr>
+
+
+                        <!-- APPLICANT -->
+
+                        <td>
+
+                            <div class="applicant-box">
+
+                                <div class="applicant-icon">
+                                    👤
+                                </div>
+
+                                <div>
+
+                                    <span class="applicant-name">
+                                        {{ loan.applicant_name }}
+                                    </span>
+
+                                    <span class="applicant-id">
+                                        Loan #{{ loan.id }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- AMOUNT -->
+
+                        <td>
+
+                            <span class="loan-amount">
+                                ₹{{ loan.amount }}
+                            </span>
+
+                        </td>
+
+
+                        <!-- PURPOSE -->
+
+                        <td>
+                            {{ loan.purpose }}
+                        </td>
+
+
+                        <!-- REPAYMENT -->
+
+                        <td>
+                            {{ loan.repayment_period }}
+                        </td>
+
+
+                        <!-- SECURITY -->
+
+                        <td>
+
+                            <span class="security">
+                                🔐 {{ loan.security_type }}
+                            </span>
+
+                        </td>
+
+
+                        <!-- GUARANTOR -->
+
+                        <td>
+
+                            {{ loan.guarantor_name }}
+
+                            <br>
+
+                            <small>
+                                {{ loan.guarantor_phone }}
+                            </small>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if loan.status == "Pending" %}
+
+                                <span class="loan-status pending">
+                                    ⏳ Pending
+                                </span>
+
+                            {% elif loan.status == "Approved" %}
+
+                                <span class="loan-status approved">
+                                    ✓ Approved
+                                </span>
+
+                            {% elif loan.status == "Rejected" %}
+
+                                <span class="loan-status rejected">
+                                    ✕ Rejected
+                                </span>
+
+                            {% else %}
+
+                                <span class="loan-status pending">
+                                    {{ loan.status }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-dashboard">
+
+            <div class="empty-icon">
+                📭
+            </div>
+
+            <h2>
+                No Loan Applications Yet
+            </h2>
+
+            <p>
+                When members apply for loans, their applications
+                will appear here.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</section>
+
+
+</body>
+
+</html>
