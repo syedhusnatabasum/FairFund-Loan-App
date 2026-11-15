@@ -30,3 +30,5 @@ FairFund is a Flask-based web application designed to provide an interest-free l
 
 ## Developer
 Developed as an academic project.
+##project live link
+https://fairfund-loan-app.onrender.com
