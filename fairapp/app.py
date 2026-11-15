@@ -1,3 +1,4 @@
+import os
 from flask import (
     Flask,
     render_template,
@@ -6,7 +7,7 @@ from flask import (
     url_for,
     session,
     flash,
-    os
+    
 )
 
 from flask_sqlalchemy import SQLAlchemy
